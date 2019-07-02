@@ -13,9 +13,6 @@ Zone.__load_patch('script', (global, Zone, api) => {
       return global[api.symbol('scriptIndex')];
     };
   }
-  if (!global[api.symbol('scriptZoneMap')]) {
-    global[api.symbol('scriptZoneMap')] = {};
-  }
   const oriDesc =
       Object.getOwnPropertyDescriptor(HTMLScriptElement.prototype, 'src');
   Object.defineProperty(HTMLScriptElement.prototype, 'src', {
@@ -28,7 +25,6 @@ Zone.__load_patch('script', (global, Zone, api) => {
       // load script content and eval in the current Zone.
       fetch(src).then(scriptContent => scriptContent.text()).then(text => {
         const scriptIndex = global[api.symbol('getScriptIndex')]();
-        global[api.symbol('scriptZoneMap')][scriptIndex] = Zone.current;
         global[api.symbol(`script${scriptIndex}`)] = new Function(`${text}`);
         this.text = `
         const func = window[Zone.__symbol__('script${scriptIndex}')];
