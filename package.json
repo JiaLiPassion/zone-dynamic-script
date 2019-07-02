@@ -1,0 +1,17 @@
+{
+  "name": "zone-script",
+  "version": "1.0.0",
+  "description": "",
+  "main": "patch.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "http-server ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "http-server": "^0.11.1",
+    "zone.js": "^0.9.1"
+  }
+}

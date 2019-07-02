@@ -1,0 +1,26 @@
+<html>
+
+<head>
+    <script src="./node_modules/zone.js/dist/zone.js"></script>
+    <script src="./patch.js"></script>
+    <script>
+        function loadScript() {
+            Zone.current.fork({ name: 'dynamic' }).run(function () {
+                console.log('loading zone', Zone.current.name);
+                const script = document.createElement("script");
+                script.type = "text/javascript";
+                script.src = "./test.js";
+                document.body.appendChild(script);
+            });
+        }
+        window.onload = function () {
+            loadScript();
+        }
+    </script>
+</head>
+
+<body>
+    <div></div>
+</body>
+
+</html>
