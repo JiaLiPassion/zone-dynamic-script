@@ -28,7 +28,9 @@ Zone.__load_patch('script', (global, Zone, api) => {
         global[api.symbol(`script${scriptIndex}`)] = new Function(`${text}`);
         this.text = `
         const func = window[Zone.__symbol__('script${scriptIndex}')];
-        func();
+        if (func) {
+          func();
+        }
         `;
       });
     }
